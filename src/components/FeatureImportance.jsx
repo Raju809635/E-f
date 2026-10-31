@@ -1,0 +1,2 @@
+import {BarChart,Bar,XAxis,YAxis,Tooltip,ResponsiveContainer} from 'recharts';
+export default function FeatureImportance({items=[]}){return <div className="chart">{items.length?<ResponsiveContainer width="100%" height={270}><BarChart data={items.slice(0,10)} layout="vertical"><XAxis type="number"/><YAxis dataKey="feature" type="category" width={120}/><Tooltip/><Bar dataKey="importance" fill="#72d6c5"/></BarChart></ResponsiveContainer>:<p className="pending">Feature importance appears after training.</p>}</div>}
