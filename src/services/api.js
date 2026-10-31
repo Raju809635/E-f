@@ -1,3 +1,3 @@
-const BASE=import.meta.env.VITE_API_URL||'http://localhost:8000/api';
-async function request(path,options){const res=await fetch(`${BASE}${path}`,options);if(!res.ok){let message=`Request failed (${res.status})`;try{message=(await res.json()).detail||message}catch{}throw new Error(message)}return res.json()}
+export const API_BASE=import.meta.env.VITE_API_URL||(import.meta.env.PROD?'/api':'http://localhost:8000/api');
+async function request(path,options){const res=await fetch(`${API_BASE}${path}`,options);if(!res.ok){let message=`Request failed (${res.status})`;try{message=(await res.json()).detail||message}catch{}throw new Error(message)}return res.json()}
 export const getMetrics=()=>request('/metrics'); export const getSummary=()=>request('/dataset/summary'); export const getImportance=(model='random_forest')=>request(`/feature-importance?model=${model}`); export const predictOrder=(body)=>request('/predict',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}); export const getGraphs=()=>request('/graphs');
